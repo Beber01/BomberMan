@@ -1,0 +1,24 @@
+extends ../layouts/default
+
+block main
+    .hero-unit
+        .row
+            .span8.offset2.form-horizontal
+                fieldset
+                    legend Create a new game.
+
+                    form.signup(action="/games", method="post")
+
+                        .control-group
+                            label.control-label(for='name') Name
+                            .controls
+                                input#name(type='text', name="name", value=game.name)
+
+                        .control-group
+                            label.control-label(for='isPublic') Public
+                            .controls
+                                input#isPublic(type='checkbox', name="isPublic", value=game.isPublic)
+
+                        .control-group
+                            .controls
+                                button.btn.btn-primary(type='submit') Create

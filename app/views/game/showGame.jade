@@ -1,0 +1,35 @@
+extends ../layouts/default
+
+block main
+    .row
+        .span6
+            h1 #{game.name}
+
+        .span6
+            #{isMember}
+                if !isMember
+                    a(href="/join/#{game._id}")
+                        .btn(style="width:100px;float:right;") Join it !
+
+                if game.owner == req.user.id
+                    form.login(action="/invite", method="post")
+                        .control-group(style="margin-top:20px;float:center;")
+                            .controls
+                                input#username(type='text', name="username", placeholder='Username', style="margin-right:10px;")
+                                input#game(type='hidden', name='game', placeholder='Game', value=game._id)
+                                button.btn.btn-primary(type='submit') Invite
+
+    .row
+        br
+
+    .row
+        #{isMember}
+            if isMember
+                canvas#mainCanvas.bordered(data-userid=player.id, width='800', height='500', onmousemove='bomberman.mousemove(event);')
+
+            if !isMember
+                h5 Actualy
+                    if game.members.length > 1
+                        , #{game.members.length} persons are playing, you can join them.
+                    if game.members.length == 1
+                        , #{game.members.length} person is playing, you can join him.

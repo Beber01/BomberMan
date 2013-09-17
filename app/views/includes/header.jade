@@ -1,0 +1,15 @@
+
+header#header
+    .navbar.navbar-fixed-top
+        .navbar-inner
+            .container
+                a.brand(href='/') BomberMan
+                .nav-collapse.collapse
+
+                if (req.isAuthenticated())
+                    ul.nav
+                        li
+                            a(href="/users/"+req.user.id, title="Profile") #{req.user.username}
+                    ul.nav.pull-right
+                        li
+                            a(href="/logout", title="logout") Logout

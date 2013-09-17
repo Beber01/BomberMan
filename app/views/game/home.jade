@@ -1,0 +1,28 @@
+extends ../layouts/default
+
+block main
+    .row
+        .span1
+        .span7
+            .container
+                h2 Games
+                a(href="/createGame")
+                    .btn(style="width:100px;float:right;") New game
+    .row
+        br
+    .row
+        .span1
+        .span7
+            table
+                tr
+                    th(style="width:230px") Game
+                    th(style="width:230px") Creator
+                    th(style="width:230px") Number of players
+                each g in games
+                    tr
+                        td
+                            a(href="/games/"+g.id, title=g.name) #{g.name}
+                        td
+                            a(href="/users/"+g.owner, title=g.owner.username) #{g.owner.username}
+                        td
+                            h5(style="text-align:center") #{g.members.length}

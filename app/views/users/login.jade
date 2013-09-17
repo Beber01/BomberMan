@@ -1,0 +1,29 @@
+extends ../layouts/default
+
+block main
+    .row
+        .span1
+        .span7
+            .hero-unit
+                p
+                    h1 Welcome to BomberMan !
+                p BomberMan is a multi-player game about placing bombs in order to kill enemies and destroy obstacles.
+                p What are you waiting for ? Click on "Register" to create a new account, or click on "Login" if you are already one of us !
+        .span4
+            .well
+                form.login(action="/users/session", method="post")
+                    p.error= message
+                    .control-group
+                        .controls
+                            input#email(type='text', name="email", placeholder='Email')
+
+                    .control-group
+                        .controls
+                            input#password(type='password', name="password", placeholder='Password')
+
+                    .form-actions
+                        button.btn.btn-primary(type='submit') Login
+                        &nbsp;
+                        | or&nbsp;
+                        a.show-signup(href="/register") Register
+

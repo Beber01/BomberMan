@@ -1,0 +1,29 @@
+extends ../layouts/default
+
+block main
+    .row
+        h1= user.username
+
+    .row
+        if publicGames.length > 0
+            h2 Games
+            each game in publicGames
+                li
+                    a(href="/games/"+game.id, title=game.name) #{game.name}
+
+    .row
+        if privateGames.length > 0 && user.id == req.user.id
+            h2 Private games
+            each game in privateGames
+                li
+                    a(href="/games/"+game.id, title=game.name) #{game.name}
+
+    .row
+        if invites.length > 0 && user.id == req.user.id
+            h2 Invites
+            each invite in invites
+                li
+                    a(href="/users/"+invite.sender.id, title='Invite') #{invite.sender.username}
+                    &nbspsend you a invite to join him on "
+                    a(href="/acceptInvite/"+invite.id, title='Invite') #{invite.game.name}
+                    "
